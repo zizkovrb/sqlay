@@ -42,7 +42,6 @@ VALUE method_sqlay_execute(VALUE self, VALUE filename, VALUE query) {
         rb_hash_aset(row, rb_str_new2(column), rb_str_new2(value));
       }
       rb_ary_push(result, row);
-      printf("\n");
     } else if (retval == SQLITE_DONE) {
       break;
     }
