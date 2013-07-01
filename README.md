@@ -6,17 +6,21 @@ Really simple sqlite3 bindings for ruby. Just for my education purposes.
 
 Add this line to your application's Gemfile:
 
-    gem 'sqlay'
+```ruby
+gem 'sqlay'
+```
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
 ## Usage
 
 ```ruby
-    query = Sqlay.execute("test.db", "SELECT date('now') AS date;")
-    query[0]["date"] #=> '27/06/2013'
+query = Sqlay.execute("test.db", "SELECT date('now') AS date;")
+query[0]["date"] #=> '27/06/2013'
 ```
 
 ## Contributing
