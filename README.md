@@ -7,7 +7,7 @@ Really simple sqlite3 bindings for ruby. Just for my education purposes.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sqlay'
+gem 'sqlay', github: 'simi/sqlay'
 ```
 
 And then execute:

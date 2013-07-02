@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Sqlay::VERSION
   spec.authors       = ["Josef Šimánek"]
   spec.email         = ["retro@ballgag.cz"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{simple SQLite3 ruby wrapper}
+  spec.summary       = %q{including many bugs, just for fun}
   spec.homepage      = ""
   spec.license       = "MIT"
   spec.extensions    = ["ext/sqlay/extconf.rb"]
