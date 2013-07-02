@@ -15,6 +15,17 @@ class TestSqlay < MiniTest::Unit::TestCase
     }
   end
 
+  def test_cannot_open_database_error_message
+    # workaround for testing error message
+    message = "fail :("
+    begin
+      Sqlay.execute("/a/b/c/d", "SELECT date('now');")
+    rescue Sqlay::Error => e
+      message = e.message
+    end
+    assert_equal("Cannot open database.", message)
+  end
+
   def test_query_date
     date = Time.now.utc.to_s.split(' ').first
     query = Sqlay.execute(":memory:", "SELECT date('now') AS date;")
@@ -22,8 +33,19 @@ class TestSqlay < MiniTest::Unit::TestCase
   end
 
   def test_error
-    assert_raises(Sqlay::Error, "Error 1, message: 'near \"null\": syntax error'") {
+    assert_raises(Sqlay::Error) {
       Sqlay.execute(":memory:", "SELECT null AS null;")
     }
+  end
+
+  def test_error_message
+    # workaround for testing error message
+    message = "fail :("
+    begin
+      Sqlay.execute(":memory:", "SELECT null AS null;")
+    rescue Sqlay::Error => e
+      message = e.message
+    end
+    assert_equal("Error 1, message: 'near \"null\": syntax error'", message)
   end
 end
