@@ -26,10 +26,10 @@ query[0]["date"] #=> '27/06/2013'
 ## DONE
 
 * basic data types works now (integer, float, string and null)
+* basic error reporting (``Sqlay::Error`` with error message)
 
 ## TODO
 
-* error reporting
 * return valid BLOB
 
 ## Contributing

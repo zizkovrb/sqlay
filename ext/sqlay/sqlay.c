@@ -4,6 +4,7 @@
 #include <ruby.h>
 
 VALUE Sqlay = Qnil;
+VALUE rb_eSqlayError = Qnil;
 
 VALUE method_sqlay_execute(VALUE self, VALUE filename, VALUE query) {
   int retval;
@@ -14,7 +15,8 @@ VALUE method_sqlay_execute(VALUE self, VALUE filename, VALUE query) {
   retval = sqlite3_open(StringValuePtr(filename), &handle);
 
   if(retval) {
-    return Qfalse;
+    const char * error = "Cannot open database.";
+    rb_raise(rb_eSqlayError, error);
   }
 
   char * query2;
@@ -23,7 +25,9 @@ VALUE method_sqlay_execute(VALUE self, VALUE filename, VALUE query) {
   retval = sqlite3_prepare_v2(handle, query2, -1, &stmt, 0);
 
   if(retval) {
-    return Qfalse;
+    char error[1024];
+    sprintf(error, "Error %d, message: '%s'", sqlite3_errcode(handle), sqlite3_errmsg(handle));
+    rb_raise(rb_eSqlayError, error);
   }
 
   int cols = sqlite3_column_count(stmt);
@@ -72,6 +76,7 @@ VALUE method_sqlay_execute(VALUE self, VALUE filename, VALUE query) {
 
 void Init_sqlay() {
   Sqlay = rb_define_module("Sqlay");
+  rb_eSqlayError = rb_define_class_under(Sqlay, "Error", rb_eException);
   rb_define_singleton_method(Sqlay, "execute", method_sqlay_execute, 2);
 }
 
