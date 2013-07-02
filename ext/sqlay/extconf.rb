@@ -1,5 +1,5 @@
 require 'mkmf'
-$CFLAGS = "-std=c99"
+$CFLAGS = "-std=c99 -fPIC"
 extension_name = "sqlay"
 
 dir_config(extension_name)
