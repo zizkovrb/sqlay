@@ -23,10 +23,14 @@ query = Sqlay.execute("test.db", "SELECT date('now') AS date;")
 query[0]["date"] #=> '27/06/2013'
 ```
 
+## DONE
+
+* basic data types works now (integer, float, string and null)
+
 ## TODO
 
-* return valid data types based on column's type
 * error reporting
+* return valid BLOB
 
 ## Contributing
 
