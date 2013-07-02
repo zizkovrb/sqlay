@@ -21,6 +21,15 @@ $ bundle
 ```ruby
 query = Sqlay.execute("test.db", "SELECT date('now') AS date;")
 query[0]["date"] #=> '27/06/2013'
+
+query = Sqlay.execute("test.db", "SELECT 15 AS number;")
+query[0]["number"] #=> 15
+
+query = Sqlay.execute(":memory:", "SELECT 3.1415 AS float;")
+query[0]["float"] #=> 3.1415
+
+query = Sqlay.execute(":memory:", "SELECT null AS nil;")
+query[0]["nil"] #=> nil
 ```
 
 ## DONE
