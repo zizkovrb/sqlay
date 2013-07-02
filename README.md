@@ -26,6 +26,7 @@ query[0]["date"] #=> '27/06/2013'
 ## TODO
 
 * return valid data types based on column's type
+* error reporting
 
 ## Contributing
 

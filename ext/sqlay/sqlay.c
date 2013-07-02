@@ -36,10 +36,28 @@ VALUE method_sqlay_execute(VALUE self, VALUE filename, VALUE query) {
     if(retval == SQLITE_ROW) {
       VALUE row = rb_hash_new();
       for(int col=0; col<cols; col++) {
-        const char *value  = sqlite3_column_text(stmt, col);
+
+        //column name
         const char *column = sqlite3_column_name(stmt, col);
 
-        rb_hash_aset(row, rb_str_new2(column), rb_str_new2(value));
+        // column type
+        int column_type = sqlite3_column_type(stmt, col);
+
+        // type binding
+        if(column_type == SQLITE3_TEXT) {
+          const char *value = (const char*)sqlite3_column_text(stmt, col);
+          rb_hash_aset(row, rb_str_new2(column), rb_str_new2(value));
+        } else if(column_type == SQLITE_INTEGER) {
+          int value = sqlite3_column_int(stmt, col);
+          rb_hash_aset(row, rb_str_new2(column), rb_int_new(value));
+        } else if(column_type == SQLITE_FLOAT) {
+          double value = sqlite3_column_double(stmt, col);
+          rb_hash_aset(row, rb_str_new2(column), rb_float_new(value));
+        } else if(column_type == SQLITE_NULL) {
+          rb_hash_aset(row, rb_str_new2(column), Qnil);
+        } else {
+          return Qfalse;
+        }
       }
       rb_ary_push(result, row);
     } else if (retval == SQLITE_DONE) {
