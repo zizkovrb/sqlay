@@ -1,4 +1,4 @@
-# Sqlay [![Build Status](https://travis-ci.org/simi/sqlay.png?branch=master)](https://travis-ci.org/simi/sqlay)
+# Sqlay [![Build Status](https://travis-ci.org/zizkovrb/sqlay.svg?branch=master)](https://travis-ci.org/zizkovrb/sqlay)
 
 Really simple sqlite3 bindings for ruby. Just for my education purposes.
 
